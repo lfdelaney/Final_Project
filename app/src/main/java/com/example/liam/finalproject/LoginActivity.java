@@ -105,7 +105,9 @@ public class LoginActivity extends FirebaseLoginBaseActivity implements book.OnF
         graceRef.updateChildren(map);
 
         Toast.makeText(getApplicationContext(), LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, book.newInstance(authData.getUid())).addToBackStack(null).commit();
+        Intent intent = new Intent(this,AppActivity.class);
+        startActivity(intent);
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container, book.newInstance(authData.getUid())).addToBackStack(null).commit();
         firebaseRef.unauth();
     }
 

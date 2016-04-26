@@ -20,7 +20,7 @@ import android.widget.TextView;
  */
 public class PlayerCard extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    //private OnFragmentInteractionListener mListener;
 
     public PlayerCard() {
         // Required empty public constructor
@@ -52,6 +52,7 @@ public class PlayerCard extends Fragment {
         return view;
     }
 
+    /*
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -68,8 +69,8 @@ public class PlayerCard extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     public interface OnFragmentInteractionListener {
 
     }
+    */
 }
