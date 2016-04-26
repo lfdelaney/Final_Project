@@ -3,6 +3,7 @@ package com.example.liam.finalproject;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,9 +93,11 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
                 mName = (String) authData.getProviderData().get("displayName");
                 break;
         }
+        Log.d("mName", mName);
         Toast.makeText(getApplicationContext(), LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
-        Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent myIntent = new Intent(LoginActivity.this, AppActivity.class);
         LoginActivity.this.startActivity(myIntent);
+        firebaseRef.unauth();
     }
 
     @Override
