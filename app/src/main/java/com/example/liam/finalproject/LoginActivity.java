@@ -1,6 +1,7 @@
 package com.example.liam.finalproject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +17,10 @@ import com.firebase.ui.auth.core.AuthProviderType;
 import com.firebase.ui.auth.core.FirebaseLoginBaseActivity;
 import com.firebase.ui.auth.core.FirebaseLoginError;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends FirebaseLoginBaseActivity{
+public class LoginActivity extends FirebaseLoginBaseActivity implements book.OnFragmentInteractionListener{
 
     Firebase firebaseRef;
     EditText userNameET;
@@ -93,10 +95,17 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
                 mName = (String) authData.getProviderData().get("displayName");
                 break;
         }
+        Log.d("auth", authData.toString());
         Log.d("mName", mName);
+
+        Firebase uRef = firebaseRef.child("users");
+        Firebase graceRef = uRef.child(authData.getUid());
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("E-Mail", authData.getProviderData().get("email"));
+        graceRef.updateChildren(map);
+
         Toast.makeText(getApplicationContext(), LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
-        Intent myIntent = new Intent(LoginActivity.this, AppActivity.class);
-        LoginActivity.this.startActivity(myIntent);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, book.newInstance(authData.getUid())).addToBackStack(null).commit();
         firebaseRef.unauth();
     }
 
@@ -143,5 +152,8 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
                 snackbar.show();
             }
         });
+    }
+    public void onFragmentInteraction(Uri uri){
+
     }
 }

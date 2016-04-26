@@ -17,15 +17,4 @@ public class AppActivity extends AppCompatActivity {
 //            getSupportFragmentManager().beginTransaction().replace(R.id.container, pickYourTeam.newInstance()).commit();
         }
     }
-    public void buttonPress(int select){
-        switch (select){
-            case (0):
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, newTeam.newInstance()).commit();
-            case (1):
-//                int teamid = loadTeam()
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, book.newInstance(teamid)).commit();
-            default:
-                break;
-        }
-    }
 }
