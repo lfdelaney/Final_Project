@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +19,11 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -36,11 +41,9 @@ public class recyclerview extends Fragment {
     private ShareActionProvider mShareActionProvider;
     private RecyclerView rview;
     private android.support.v7.widget.Toolbar toolbar;
-    private ImageView imageView;
     private MyFirebaseRecylerAdapter fireAdapter;
     private LinearLayoutManager llm;
-    final Firebase ref = new Firebase("https://diamond-tracker.firebaseio.com/League/");
-
+    private TeamData teamData = new TeamData();
 
 
     public recyclerview() {
@@ -49,40 +52,65 @@ public class recyclerview extends Fragment {
 
 
     public static recyclerview newInstance() {
+        Log.d("newInstance", "enter");
         recyclerview fragment = new recyclerview();
+        Log.d("newInstance", "exit");
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("onCreate", "enter");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+        Log.d("onCreate", "exit");
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("onCreateView", "enter");
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         View newView = inflater.inflate(R.layout.card_layout, container, false);
 
         rview =(RecyclerView) rootview.findViewById(R.id.cardList);
+        final Firebase ref = new Firebase("https://diamond-tracker.firebaseio.com/League");
         fireAdapter = new MyFirebaseRecylerAdapter(Team.class, R.layout.card_layout,MyFirebaseRecylerAdapter.TeamViewHolder.class, ref, getActivity());
         rview.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rview.setLayoutManager(llm);
         rview.setAdapter(fireAdapter);
-        imageView = (ImageView) newView.findViewById(R.id.cardClick);
 
+        if(teamData.getSize() == 0){
+            teamData.setAdapter(fireAdapter);
+            teamData.setContext(getActivity());
+            teamData.initializeDataFromCloud();
+        }
 
         fireAdapter.SetOnItemClickListener(new MyFirebaseRecylerAdapter.onItemClickListener() {
 
             @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity().getApplicationContext(), "Clicked Card Item", Toast.LENGTH_LONG).show();
-                mListener.onListItemSelected(position);
+            public void onItemClick(View view, final int position) {
+                HashMap<String, ?>team = teamData.getItem(position);
+                String id = (String)team.get("id");
+                Firebase ref = teamData.getFireBaseRef();
+                ref.child("Team " + id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
+                        String id = (String) team.get("id");
+                        Toast.makeText(getActivity().getApplicationContext(), "Clicked Team " + id, Toast.LENGTH_LONG).show();
+                        mListener.onListItemSelected(position);
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                        Log.d("Error", "The Error reads" + firebaseError.getMessage());
+                    }
+                });
             }
 
             @Override
@@ -100,13 +128,13 @@ public class recyclerview extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch(item.getItemId()){
                             case R.id.duplicateItem:
-                                Team cloud = fireAdapter.getItem(position);
+                                //Team cloud = fireAdapter.getItem(position);
                                 //cloud.setName(cloud.getName() + "-New");
                                 //cloud.setId(cloud.getId() + "-New");
                                 //ref.child(cloud.getId()).setValue(cloud);
                                 return true;
                             case R.id.deleteItem:
-                                Team cloudDelete = fireAdapter.getItem(position);
+                                //Team cloudDelete = fireAdapter.getItem(position);
                                 //ref.child(cloudDelete.getId()).removeValue();
                                 //movieData.removeItem(position);
                                 //myAdapter.notifyItemRemoved(position);
@@ -123,7 +151,7 @@ public class recyclerview extends Fragment {
 
         });
 
-
+        Log.d("onCreateView", "exit");
         return rootview;
     }
 
@@ -134,6 +162,7 @@ public class recyclerview extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        Log.d("onAttach", "enter");
         super.onAttach(context);
 
         if (context instanceof OnFragmentInteractionListener) {
@@ -142,12 +171,14 @@ public class recyclerview extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-
+        Log.d("onAttach", "exit");
     }
     @Override
     public void onDetach() {
+        Log.d("onDetach", "enter");
         super.onDetach();
         mListener = null;
+        Log.d("onDetach", "exit");
     }
 
     public interface OnFragmentInteractionListener {

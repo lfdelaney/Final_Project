@@ -19,7 +19,6 @@ private Toolbar toolbar;
 private NavigationView navigationView;
 private DrawerLayout drawerLayout;
 
-        //  private Firebase firebaseRef = new Firebase("https://cis400hw9.firebaseio.com/");
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
