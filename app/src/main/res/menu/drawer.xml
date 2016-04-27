@@ -3,15 +3,22 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/playerCardItem"
+            android:id="@+id/standingsItem"
             android:checked="false"
-            android:title="Player Card"
+            android:title="League Standings"
             />
 
         <item
-            android:id="@+id/bookItem"
+            android:id="@+id/playBallItem"
             android:checked="false"
-            android:title="Book"
+            android:title="Play Ball!"
+            />
+
+
+        <item
+            android:id="@+id/aboutUsItem"
+            android:checked="false"
+            android:title="About Us"
             />
 
     </group>
