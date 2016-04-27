@@ -43,7 +43,7 @@ private DrawerLayout drawerLayout;
                         }
                     };
 
-            drawerLayout.setDrawerListener(actionBarDrawerToggle);
+            drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
             actionBarDrawerToggle.syncState();
 /*
@@ -69,6 +69,11 @@ private DrawerLayout drawerLayout;
                     break;
                 case R.id.aboutUsItem:
                     Toast.makeText(getApplicationContext(), "Clicked AboutUS Item", Toast.LENGTH_LONG).show();
+                    break;
+                case R.id.createTeam:
+                    Intent intent2 = new Intent(this,createActivity.class);
+                    startActivity(intent2);
+                    break;
                 default:
                     break;
             }

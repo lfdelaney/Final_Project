@@ -9,4 +9,5 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_closed">Close Drawer</string>
     <string name="title_activity_book">BookActivity</string>
+    <string name="title_activity_create">createActivity</string>
 </resources>

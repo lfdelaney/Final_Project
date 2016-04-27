@@ -20,6 +20,10 @@
             android:checked="false"
             android:title="About Us"
             />
-
+        <item
+            android:id="@+id/createTeam"
+            android:checked="false"
+            android:title="Create Team"
+                />
     </group>
 </menu>

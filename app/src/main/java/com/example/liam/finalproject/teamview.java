@@ -15,49 +15,30 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link teamview.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link teamview#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class teamview extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private int mParam2;
     private ImageView icon;
     private int wins,loss;
     private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,title,record;
-    private Firebase ref = new Firebase("https://diamond-tracker.firebasio.com/League");
-   // private String serv = "https://diamond-tracker.firebasio.com/League";
+    private Firebase mRef = new Firebase("https://diamond-tracker.firebaseio.com/League");
 
     public teamview() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment teamview.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static teamview newInstance(int param2) {
         teamview fragment = new teamview();
         Bundle args = new Bundle();
@@ -72,6 +53,8 @@ public class teamview extends Fragment {
         if (getArguments() != null) {
             mParam2 = getArguments().getInt(ARG_PARAM2);
         }
+        mRef.goOffline();
+        mRef.goOnline();
     }
 
     @Override
@@ -90,16 +73,19 @@ public class teamview extends Fragment {
         t9 = (TextView)view.findViewById(R.id.player9);
         title = (TextView)view.findViewById(R.id.team);
         icon = (ImageView)view.findViewById(R.id.teamIcon);
+        record = (TextView)view.findViewById(R.id.record);
+        //Query queryRef = mRef.orderByKey().equalTo(mParam2);
 
-        ref.addChildEventListener(new ChildEventListener() {
+        mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d("snapshotadded: ", dataSnapshot.toString());
                 HashMap<String, ?> temp = (HashMap<String, ?>) dataSnapshot.getValue();
-                String flag = (String)temp.get("key");
-
-                title.setText((String)temp.get("name"));
-                Picasso.with(getContext()).load((String)temp.get("url")).into(icon);
+                title.setText((String) temp.get("name"));
+                Picasso.with(getContext()).load((String) temp.get("url")).into(icon);
+                Long temp1  = (Long)temp.get("wins");
+                Long temp2 = (Long)temp.get("losses");
+                record.setText(temp1.toString() + "  -  " + temp2.toString());
             }
 
             @Override
@@ -122,7 +108,6 @@ public class teamview extends Fragment {
 
             }
         });
-
 
 
         return view;
