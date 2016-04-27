@@ -1,5 +1,6 @@
 package com.example.liam.finalproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,9 +19,9 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
     }
 
     @Override
-    public void onListItemSelected(int x, HashMap<String, ?> book)
+    public void onListItemSelected(int x)
     {
-        //stateListDrawable.addState(new int[]{ android.R.attr.state_pressed }, R.drawable.card_shape_pressed);
+        getSupportFragmentManager().beginTransaction().replace(R.id.myholder, teamview.newInstance(x)).addToBackStack(null).commit();
     }
 
 

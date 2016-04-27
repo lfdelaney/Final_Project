@@ -101,8 +101,7 @@ public class recyclerview extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(getActivity().getApplicationContext(), "Clicked Card Item", Toast.LENGTH_LONG).show();
-                //HashMap<String, ?> mov = (HashMap<String, ?>) movieData.getItem(position) ;
-                //mListener.onListItemSelected(position, mov);
+                mListener.onListItemSelected(position);
             }
 
             @Override
@@ -183,6 +182,6 @@ public class recyclerview extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListItemSelected(int x, HashMap<String, ?> book);
+        void onListItemSelected(int x);
     }
 }

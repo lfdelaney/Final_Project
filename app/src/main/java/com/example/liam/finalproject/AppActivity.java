@@ -60,7 +60,6 @@ private DrawerLayout drawerLayout;
             switch(id){
                 case R.id.playBallItem:
                     Toast.makeText(getApplicationContext(), "Clicked PlayBall Item", Toast.LENGTH_LONG).show();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.holder, PlayerCard.newInstance()).addToBackStack(null).commit();
                     break;
                 case R.id.standingsItem:
                    // Toast.makeText(getApplicationContext(), "Clicked Book Item", Toast.LENGTH_LONG).show();

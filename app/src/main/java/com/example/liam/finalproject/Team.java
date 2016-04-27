@@ -3,6 +3,7 @@ package com.example.liam.finalproject;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * Created by rdpie_000 on 4/26/2016.
@@ -16,6 +17,14 @@ public class Team implements Serializable {
     public Team(){
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String u) {
+        url = u;
+    }
+
     public String getName(){return name;}
 
     public void setName(String n){name = n;}
@@ -27,14 +36,5 @@ public class Team implements Serializable {
     public int getLosses(){return losses;}
 
     public void setLosses(int l){losses = l;}
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String u) {
-        url = u;
-    }
-
 
 }
