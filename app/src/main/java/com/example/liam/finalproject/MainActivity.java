@@ -10,12 +10,16 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
+import com.firebase.client.Firebase;
+
 import java.lang.reflect.Type;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Firebase.setAndroidContext(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         super.onCreate(savedInstanceState);
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                intent = new Intent(getBaseContext(), LoginActivity.class);
+                intent = new Intent(getBaseContext(), AppActivity.class);
                 startActivity(intent);
             }
         });
