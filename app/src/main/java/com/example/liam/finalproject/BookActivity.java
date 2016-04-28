@@ -19,6 +19,7 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
         if(savedInstanceState==null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.myholder, recyclerview.newInstance()).commit();
         }
+
     }
 
     @Override

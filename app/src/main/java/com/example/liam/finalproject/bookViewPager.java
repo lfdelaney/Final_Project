@@ -68,6 +68,8 @@ public class bookViewPager extends Fragment {
         View view = inflater.inflate(R.layout.fragment_book_view_pager, container, false);
 
 
+
+
         return view;
     }
 
