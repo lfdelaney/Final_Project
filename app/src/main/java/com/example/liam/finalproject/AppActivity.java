@@ -1,6 +1,7 @@
 package com.example.liam.finalproject;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,12 +13,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AppActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
-private Toolbar toolbar;
-private NavigationView navigationView;
-private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    Button viewLeague;
+    Button playBall;
 
 
         @Override
@@ -45,11 +50,31 @@ private DrawerLayout drawerLayout;
             drawerLayout.addDrawerListener(actionBarDrawerToggle);
 
             actionBarDrawerToggle.syncState();
-/*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.holder, recycler_view.newInstance()).commit();
-        }
-        */
+
+            viewLeague = (Button)findViewById(R.id.viewLeague);
+            playBall = (Button)findViewById(R.id.playBall);
+
+            viewLeague.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(),BookActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            playBall.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(), "Clicked Play Ball Item", Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+            TextView title = (TextView) findViewById(R.id.appTitle);
+            Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
+            title.setTypeface(tf);
+
+
         }
 
         public boolean onNavigationItemSelected(MenuItem item)

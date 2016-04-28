@@ -4,4 +4,29 @@
     android:layout_height="match_parent"
     android:id="@+id/holder">
 
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="133dp"
+        android:text="View League"
+        android:id="@+id/viewLeague"
+        android:layout_gravity="center" />
+
+    <Button
+        android:layout_width="320dp"
+        android:layout_height="133dp"
+        android:text="Play Ball!"
+        android:id="@+id/playBall"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:id="@+id/appTitle"
+        android:layout_alignTop="@+id/diamond"
+        android:layout_centerHorizontal="true"
+        android:textSize="32sp"
+        android:textColor="@color/red" />
+
 </FrameLayout>

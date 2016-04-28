@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AppActivity">
+    tools:context=".AppActivity"
+    android:background="#0E980C">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/holder"
@@ -23,6 +24,35 @@
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="320dp"
+                android:layout_height="133dp"
+                android:layout_gravity="bottom|center"
+                android:text="Play Ball!"
+                android:id="@+id/playBall"
+                android:background="#C27C19"
+                android:layout_marginBottom="50dp"/>
+
+            <Button
+                android:layout_width="320dp"
+                android:layout_height="133dp"
+                android:layout_gravity="center"
+                android:text="View League"
+                android:id="@+id/viewLeague"
+                android:background="#C27C19"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:id="@+id/appTitle"
+                android:layout_alignTop="@+id/diamond"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:textSize="32sp"
+                android:textColor="@color/red"
+                android:layout_gravity="center|top"/>
         </FrameLayout>
 
     </RelativeLayout>
