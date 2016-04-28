@@ -39,6 +39,7 @@ public class TeamData {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
+                Log.d("teamData", "added Item");
                 onItemAdded(team);
                 Log.d("Team added", "added");
             }

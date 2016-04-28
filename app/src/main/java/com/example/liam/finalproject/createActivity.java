@@ -94,8 +94,8 @@ public class createActivity extends AppCompatActivity {
                 imageURL = imgDecodableString;
                 cursor.close();
                 // Set the Image in ImageView after decoding the String
-                //imgView.setImageBitmap(BitmapFactory
-                        //.decodeFile(imgDecodableString));
+
+                //test.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",
@@ -114,11 +114,12 @@ public class createActivity extends AppCompatActivity {
             return;
         }
 
+
         int temp = ((MyApplication) this.getApplication()).getCount();
-        Firebase teamRef = mRef.child("Team "+temp);
+        Firebase teamRef = mRef.push();
 
         HashMap<String, Object> team = new HashMap<>();
-        team.put("id", ""+temp);
+        team.put("id", teamRef.getKey());
         team.put("pitcher", p1.getText().toString());
         team.put("catcher", p2.getText().toString());
         team.put("first", p3.getText().toString());
@@ -133,7 +134,7 @@ public class createActivity extends AppCompatActivity {
         team.put("wins", 0);
         team.put("losses", 0);
 
-        teamRef.updateChildren(team);
+        teamRef.setValue(team);
         Toast.makeText(getApplicationContext(), "Team added", Toast.LENGTH_LONG).show();
 
         ((MyApplication) this.getApplication()).incrementCount();

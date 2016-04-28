@@ -102,7 +102,7 @@ public class recyclerview extends Fragment {
                 final String id = (String)team.get("id");
                 Firebase ref = teamData.getFireBaseRef();
                 teamList = teamData.getTeamData();
-                ref.child("Team " + id).addListenerForSingleValueEvent(new ValueEventListener() {
+                ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();

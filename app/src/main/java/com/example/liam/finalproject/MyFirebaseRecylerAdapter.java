@@ -2,6 +2,7 @@
 package com.example.liam.finalproject;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,6 +44,7 @@ public class MyFirebaseRecylerAdapter extends FirebaseRecyclerAdapter<Team,MyFir
          teamViewHolder.vTitle.setText(team.getName());
          Picasso.with(mContext).load(team.getUrl()).into(teamViewHolder.vImg);
         //movieViewHolder.vDesc.setText(movie.getDescription());
+        teamViewHolder.vImg.setImageBitmap(BitmapFactory.decodeFile(team.getUrl()));
     }
 
     //TODO: Populate ViewHolder and add listeners.
