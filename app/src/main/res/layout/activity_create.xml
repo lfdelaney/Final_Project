@@ -179,6 +179,15 @@
                 android:imeOptions="actionDone"/>
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/teamImage"
+        android:text="Choose Team Image"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -187,4 +196,5 @@
         android:id="@+id/submit"
         android:text="Submit"
         android:textSize="18sp"/>
+
 </LinearLayout>

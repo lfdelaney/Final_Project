@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BookActivity extends AppCompatActivity implements recyclerview.OnFragmentInteractionListener{
 
@@ -19,9 +21,9 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
     }
 
     @Override
-    public void onListItemSelected(int x)
+    public void onListItemSelected(int x,  Bundle b)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.myholder, teamview.newInstance(x)).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.myholder, teamview.newInstance(x,b)).addToBackStack(null).commit();
     }
 
 

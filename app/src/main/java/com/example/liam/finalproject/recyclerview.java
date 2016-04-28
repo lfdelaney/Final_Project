@@ -26,7 +26,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.Map;
 
 
 public class recyclerview extends Fragment {
@@ -44,6 +45,8 @@ public class recyclerview extends Fragment {
     private MyFirebaseRecylerAdapter fireAdapter;
     private LinearLayoutManager llm;
     private TeamData teamData = new TeamData();
+    private List<Map<String, ?>> teamList;
+    private Bundle passer;
 
 
     public recyclerview() {
@@ -96,15 +99,30 @@ public class recyclerview extends Fragment {
             @Override
             public void onItemClick(View view, final int position) {
                 HashMap<String, ?>team = teamData.getItem(position);
-                String id = (String)team.get("id");
+                final String id = (String)team.get("id");
                 Firebase ref = teamData.getFireBaseRef();
+                teamList = teamData.getTeamData();
                 ref.child("Team " + id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
-                        String id = (String) team.get("id");
+                        passer = new Bundle();
+                        passer.putString("id",id);
+                        passer.putString("catcher",(String)team.get("catcher"));
+                        passer.putString("centerField",(String)team.get("centerField"));
+                        passer.putString("first",(String)team.get("first"));
+                        passer.putString("leftField",(String)team.get("leftField"));
+                        passer.putLong("losses", (Long)team.get("losses"));
+                        passer.putLong("wins", (Long)team.get("wins"));
+                        passer.putString("name",(String)team.get("name"));
+                        passer.putString("pitcher",(String)team.get("pitcher"));
+                        passer.putString("rightField",(String)team.get("rightField"));
+                        passer.putString("second",(String)team.get("second"));
+                        passer.putString("shortStop",(String)team.get("shortStop"));
+                        passer.putString("third",(String)team.get("third"));
+                        passer.putString("url",(String)team.get("url"));
                         Toast.makeText(getActivity().getApplicationContext(), "Clicked Team " + id, Toast.LENGTH_LONG).show();
-                        mListener.onListItemSelected(position);
+                        mListener.onListItemSelected(position,passer);
                     }
 
                     @Override
@@ -183,6 +201,6 @@ public class recyclerview extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onListItemSelected(int x);
+        void onListItemSelected(int x,  Bundle bundle);
     }
 }

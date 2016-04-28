@@ -40,6 +40,7 @@ public class TeamData {
 
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
                 onItemAdded(team);
+                Log.d("Team added", "added");
             }
 
             @Override
@@ -106,5 +107,8 @@ public class TeamData {
         if (i >=0 && i < teamData.size()){
             return (HashMap) teamData.get(i);
         } else return null;
+    }
+    public List<Map<String, ?>> getTeamData(){
+        return teamData;
     }
 }
