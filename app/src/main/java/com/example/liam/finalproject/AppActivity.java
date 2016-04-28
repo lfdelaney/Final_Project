@@ -57,17 +57,11 @@ private DrawerLayout drawerLayout;
             int id = item.getItemId();
 
             switch(id){
-                case R.id.playBallItem:
-                    Toast.makeText(getApplicationContext(), "Clicked PlayBall Item", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.standingsItem:
-                   // Toast.makeText(getApplicationContext(), "Clicked Book Item", Toast.LENGTH_LONG).show();
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.holder, book.newInstance("")).addToBackStack(null).commit();
-                    Intent intent = new Intent(this,BookActivity.class);
-                    startActivity(intent);
+                case R.id.deleteTeamItem:
+                    Toast.makeText(getApplicationContext(), "Clicked Delete Item", Toast.LENGTH_LONG).show();
                     break;
                 case R.id.aboutUsItem:
-                    Toast.makeText(getApplicationContext(), "Clicked AboutUS Item", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Clicked About Us Item", Toast.LENGTH_LONG).show();
                     break;
                 case R.id.createTeam:
                     Intent intent2 = new Intent(this,createActivity.class);

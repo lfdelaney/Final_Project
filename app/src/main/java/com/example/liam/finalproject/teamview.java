@@ -75,7 +75,7 @@ public class teamview extends Fragment {
         t7 = (TextView)view.findViewById(R.id.player7);
         t8 = (TextView)view.findViewById(R.id.player8);
         t9 = (TextView)view.findViewById(R.id.player9);
-        title = (TextView)view.findViewById(R.id.team);
+        title = (TextView)view.findViewById(R.id.teamName);
         icon = (ImageView)view.findViewById(R.id.teamIcon);
         record = (TextView)view.findViewById(R.id.record);
         //Query queryRef = mRef.orderByKey().equalTo(mParam2);
@@ -86,6 +86,8 @@ public class teamview extends Fragment {
         }
         Log.d("mparam", mParam2+"");
 
+        title.setText("Team Name: " + (String) mParam1.get("name"));
+        record.setText("Record: " + (Long) mParam1.get("wins") + "-" + (Long) mParam1.get("losses"));
         t1.setText("Pitcher: " + (String) mParam1.get("pitcher"));
         t2.setText("Catcher: " + (String) mParam1.get("catcher"));
         t3.setText("First: " + (String) mParam1.get("first"));
@@ -95,7 +97,7 @@ public class teamview extends Fragment {
         t6.setText("Left Field: " + (String) mParam1.get("leftField"));
         t7.setText("Right Field: " + (String) mParam1.get("rightField"));
         t8.setText("Center Field: " + (String) mParam1.get("centerField"));
-        icon.setImageBitmap(BitmapFactory.decodeFile((String)mParam1.get("url")));
+        icon.setImageBitmap(BitmapFactory.decodeFile((String) mParam1.get("url")));
 
         return view;
     }

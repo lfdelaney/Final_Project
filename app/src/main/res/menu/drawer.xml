@@ -3,27 +3,19 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/standingsItem"
+            android:id="@+id/createTeam"
             android:checked="false"
-            android:title="League Standings"
+            android:title="Create Team"
             />
-
         <item
-            android:id="@+id/playBallItem"
+            android:id="@+id/deleteTeamItem"
             android:checked="false"
-            android:title="Play Ball!"
+            android:title="Delete Team"
             />
-
-
         <item
             android:id="@+id/aboutUsItem"
             android:checked="false"
             android:title="About Us"
             />
-        <item
-            android:id="@+id/createTeam"
-            android:checked="false"
-            android:title="Create Team"
-                />
     </group>
 </menu>
