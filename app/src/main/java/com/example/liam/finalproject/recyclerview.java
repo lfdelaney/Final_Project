@@ -88,6 +88,7 @@ public class recyclerview extends Fragment {
             teamData.setAdapter(fireAdapter);
             teamData.setContext(getActivity());
             teamData.initializeDataFromCloud();
+
         }
 
         fireAdapter.SetOnItemClickListener(new MyFirebaseRecylerAdapter.onItemClickListener() {

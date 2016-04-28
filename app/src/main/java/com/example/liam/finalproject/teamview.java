@@ -32,7 +32,7 @@ public class teamview extends Fragment {
     private ImageView icon;
     private int wins,loss;
     private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,title,record;
-    private Firebase mRef = new Firebase("https://diamond-tracker.firebaseio.com/League");
+    private TeamData teamData = new TeamData();
 
     public teamview() {
         // Required empty public constructor
@@ -53,8 +53,6 @@ public class teamview extends Fragment {
         if (getArguments() != null) {
             mParam2 = getArguments().getInt(ARG_PARAM2);
         }
-        mRef.goOffline();
-        mRef.goOnline();
     }
 
     @Override
@@ -76,39 +74,20 @@ public class teamview extends Fragment {
         record = (TextView)view.findViewById(R.id.record);
         //Query queryRef = mRef.orderByKey().equalTo(mParam2);
 
-        mRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d("snapshotadded: ", dataSnapshot.toString());
-                HashMap<String, ?> temp = (HashMap<String, ?>) dataSnapshot.getValue();
-                title.setText((String) temp.get("name"));
-                Picasso.with(getContext()).load((String) temp.get("url")).into(icon);
-                Long temp1  = (Long)temp.get("wins");
-                Long temp2 = (Long)temp.get("losses");
-                record.setText(temp1.toString() + "  -  " + temp2.toString());
-            }
+        if (teamData.getSize() == 0){
+            teamData.setContext(getActivity());
+            Firebase tRef = teamData.getFireBaseRef();
+            teamData.initializeDataFromCloud();
+            Log.d("teamData size", ""+teamData.getSize());
+        }
+        Log.d("mparam", mParam2+"");
+        HashMap<String, ?>team = teamData.getItem(mParam2);
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("snapshotchanged: ", dataSnapshot.toString());
-            }
+        //t1.setText((String)team.get("pitcher"));
+        //t2.setText((String)team.get("catcher"));
+        //t3.setText((String)team.get("first"));
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-
+        //team.toString();
 
         return view;
     }

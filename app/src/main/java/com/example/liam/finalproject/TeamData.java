@@ -30,11 +30,14 @@ public class TeamData {
     public void setAdapter(MyFirebaseRecylerAdapter a){ mAdapter = a;}
     public void setContext(Context c){ context = c;}
     public void initializeDataFromCloud(){
+        Log.d("intialize", "enter");
+
         teamData.clear();
 
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
                 onItemAdded(team);
             }
@@ -42,13 +45,13 @@ public class TeamData {
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
-                onItemRemoved(team);
+                onItemChanged(team);
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
-                onItemChanged(team);
+                onItemRemoved(team);
             }
 
             @Override
@@ -61,9 +64,9 @@ public class TeamData {
 
             }
         });
+        Log.d("intialize", "exit");
     }
     private void onItemAdded(HashMap<String, ?> team){
-        Log.d("added", team.toString());
         teamData.add(team);
         if (mAdapter != null){
             mAdapter.notifyDataSetChanged();
@@ -83,7 +86,6 @@ public class TeamData {
             }
         }
         if (position != -1){
-            Log.d("Removed", (String)teamData.get(position).get("name"));
             teamData.remove(position);
             if (mAdapter != null){
                 mAdapter.notifyDataSetChanged();
@@ -91,7 +93,10 @@ public class TeamData {
         }
     }
     private void onItemChanged(HashMap team){
-        Log.d("changed", team.toString());
+        teamData.add(team);
+        if (mAdapter != null){
+            mAdapter.notifyDataSetChanged();
+        }
     }
     public int getSize(){
         return teamData.size();
