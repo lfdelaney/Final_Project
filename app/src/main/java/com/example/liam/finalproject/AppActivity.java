@@ -66,6 +66,8 @@ public class AppActivity extends AppCompatActivity  implements NavigationView.On
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), "Clicked Play Ball Item", Toast.LENGTH_LONG).show();
+                    Intent intentPlay = new Intent(getApplicationContext(),PlayActivity.class);
+                    startActivity(intentPlay);
                 }
             });
 
