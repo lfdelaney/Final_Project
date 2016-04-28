@@ -54,7 +54,7 @@
                     android:scaleType="fitXY"/>
 
                 <TextView
-                    android:id="@+id/wins"
+                    android:id="@+id/teamRecord"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title"

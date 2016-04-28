@@ -11,12 +11,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-
+    Long currentTeam;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Firebase.setAndroidContext(this);
@@ -25,10 +30,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Firebase mRef = new Firebase("https://diamond-tracker.firebaseio.com/diamond-tracker/League");
+        mRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                currentTeam = dataSnapshot.getChildrenCount();
+                Log.d("snapShot", dataSnapshot.toString());
+                Log.d("current", currentTeam.toString());
+                ((MyApplication) getApplication()).setTeamCount(currentTeam.intValue());
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
         TextView title = (TextView) findViewById(R.id.title);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
         title.setTypeface(tf);
+
 
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {

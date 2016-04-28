@@ -114,8 +114,6 @@ public class createActivity extends AppCompatActivity {
             return;
         }
 
-
-        int temp = ((MyApplication) this.getApplication()).getCount();
         Firebase teamRef = mRef.push();
 
         HashMap<String, Object> team = new HashMap<>();

@@ -15,16 +15,18 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.HashMap;
 
 public class PlayActivity extends AppCompatActivity {
 
-    int count = 0;
-    int flag = -2;
+    boolean flag;
+    int count;
     Spinner homeSpinner;
     Spinner awaySpinner;
     String[] nameList;
+    Long children;
     ArrayAdapter<String> adapter;
     Firebase ref = new Firebase("https://diamond-tracker.firebaseio.com/League");
 
@@ -38,8 +40,12 @@ public class PlayActivity extends AppCompatActivity {
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
         title.setTypeface(tf);
 
-         nameList = new String[100];
+        int teamCount = ((MyApplication) this.getApplication()).getCount();
 
+        nameList = new String[teamCount];
+        for (int i = 0; i <nameList.length; i++){
+            nameList[i] = ""+i;
+        }
         homeSpinner = (Spinner)findViewById(R.id.homeTeam);
         awaySpinner = (Spinner)findViewById(R.id.awayTeam);
 
@@ -73,37 +79,33 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
-        if(flag == count) {
-            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nameList);
-            homeSpinner.setAdapter(adapter);
-            awaySpinner.setAdapter(adapter);
-            homeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                    Log.v("item", (String) parent.getItemAtPosition(position));
-                }
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, nameList);
+        homeSpinner.setAdapter(adapter);
+        awaySpinner.setAdapter(adapter);
+        homeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Log.v("item", (String) parent.getItemAtPosition(position));
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    // TODO Auto-generated method stub
-                }
-            });
-            awaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                    Log.v("item", (String) parent.getItemAtPosition(position));
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    // TODO Auto-generated method stub
-                }
-            });
-        }else{
-            flag++;
-            Log.d("FLAG = ", "false");
-        }
+            }
+        });
+        awaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Log.v("item", (String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 }

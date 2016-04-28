@@ -45,6 +45,9 @@ public class MyFirebaseRecylerAdapter extends FirebaseRecyclerAdapter<Team,MyFir
          Picasso.with(mContext).load(team.getUrl()).into(teamViewHolder.vImg);
         //movieViewHolder.vDesc.setText(movie.getDescription());
         teamViewHolder.vImg.setImageBitmap(BitmapFactory.decodeFile(team.getUrl()));
+        int wins = team.getWins();
+        int losses = team.getLosses();
+        teamViewHolder.record.setText(wins+ " - " + losses);
     }
 
     //TODO: Populate ViewHolder and add listeners.
@@ -53,7 +56,7 @@ public class MyFirebaseRecylerAdapter extends FirebaseRecyclerAdapter<Team,MyFir
 
         protected TextView vTitle;
         protected ImageView vImg;
-        //protected TextView vDesc;
+        protected TextView record;
         protected ImageView vMenu;
 
 
@@ -63,7 +66,7 @@ public class MyFirebaseRecylerAdapter extends FirebaseRecyclerAdapter<Team,MyFir
             vImg = (ImageView)  v.findViewById(R.id.image);
             //vDesc = (TextView)  v.findViewById(R.id.description);
             vMenu = (ImageView) v.findViewById(R.id.cardClick);
-
+            record = (TextView) v.findViewById(R.id.teamRecord);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
