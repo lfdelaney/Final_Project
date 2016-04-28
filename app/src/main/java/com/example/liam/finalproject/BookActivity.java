@@ -13,6 +13,7 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_book);
 
         if(savedInstanceState==null) {
@@ -23,7 +24,7 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
     @Override
     public void onListItemSelected(int x,  Bundle b)
     {
-        getSupportFragmentManager().beginTransaction().replace(R.id.myholder, teamview.newInstance(x,b)).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.bounce, R.anim.slide_out_right).replace(R.id.myholder, teamview.newInstance(x,b)).addToBackStack(null).commit();
     }
 
 

@@ -89,6 +89,7 @@ public class AppActivity extends AppCompatActivity  implements NavigationView.On
                     break;
                 case R.id.aboutUsItem:
                     Toast.makeText(getApplicationContext(), "Clicked About Us Item", Toast.LENGTH_LONG).show();
+                    getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.bounce, R.anim.slide_out_right).replace(R.id.drawer_layout, AboutUs.newInstance()).addToBackStack(null).commit();
                     break;
                 case R.id.createTeam:
                     Intent intent2 = new Intent(this,createActivity.class);

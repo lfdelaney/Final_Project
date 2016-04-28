@@ -1,5 +1,6 @@
 package com.example.liam.finalproject;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,9 @@ import java.util.HashMap;
 public class PlayActivity extends AppCompatActivity {
 
     boolean flag;
+    int p1,p2;
+    Bundle bundle1, bundle2;
+    ImageButton button;
     int count;
     Spinner homeSpinner;
     Spinner awaySpinner;
@@ -34,15 +39,16 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_play);
 
         TextView title = (TextView) findViewById(R.id.name);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
         title.setTypeface(tf);
 
-        int teamCount = ((MyApplication) this.getApplication()).getCount();
 
-        nameList = new String[teamCount];
+        nameList = new String[30];
         for (int i = 0; i <nameList.length; i++){
             nameList[i] = ""+i;
         }
@@ -86,6 +92,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                p1 = position;
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
 
@@ -98,12 +105,21 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
+                p2 = position;
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        button = (ImageButton)findViewById(R.id.playButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.spinnerHolder, bookViewPager.newInstance(p1, p2)).addToBackStack(null).commit();
             }
         });
 
