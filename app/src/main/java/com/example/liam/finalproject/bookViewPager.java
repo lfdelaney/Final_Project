@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class bookViewPager extends Fragment {
     private int mParam1;
     private int mParam2;
 
-    //private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     public bookViewPager() {
         // Required empty public constructor
@@ -42,11 +43,11 @@ public class bookViewPager extends Fragment {
      * @return A new instance of fragment bookViewPager.
      */
     // TODO: Rename and change types and number of parameters
-    public static bookViewPager newInstance(int param1, int param2) {
+    public static bookViewPager newInstance() {
         bookViewPager fragment = new bookViewPager();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
+        //args.putInt(ARG_PARAM1, param1);
+        //args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -64,6 +65,34 @@ public class bookViewPager extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_view_pager, container, false);
+        View view = inflater.inflate(R.layout.fragment_book_view_pager, container, false);
+
+
+        return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.d("onAttach", "enter");
+        super.onAttach(context);
+
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+        Log.d("onAttach", "exit");
+    }
+    @Override
+    public void onDetach() {
+        Log.d("onDetach", "enter");
+        super.onDetach();
+        mListener = null;
+        Log.d("onDetach", "exit");
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onImageButtonClicked();
     }
 }

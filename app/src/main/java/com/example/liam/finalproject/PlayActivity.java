@@ -119,7 +119,8 @@ public class PlayActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.spinnerHolder, bookViewPager.newInstance(p1, p2)).addToBackStack(null).commit();
+                Intent intent = new Intent(getApplicationContext(), BookView.class);
+                startActivity(intent);
             }
         });
 

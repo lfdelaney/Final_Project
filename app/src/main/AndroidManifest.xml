@@ -28,8 +28,9 @@
         <activity
             android:name=".createActivity"
             android:label="@string/title_activity_create"
-            android:theme="@style/MyTheme"></activity>
-        <activity android:name=".PlayActivity"></activity>
+            android:theme="@style/MyTheme" />
+        <activity android:name=".PlayActivity" />
+        <activity android:name=".BookView"></activity>
     </application>
 
 </manifest>
