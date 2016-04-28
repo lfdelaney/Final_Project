@@ -7,6 +7,7 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,8 @@ public class TeamData {
 
     public TeamData(){
         mRef = new Firebase(server);
+        mRef.goOffline();
+        mRef.goOnline();
         teamData = new ArrayList<Map<String, ?>>();
     }
     public void setAdapter(MyFirebaseRecylerAdapter a){ mAdapter = a;}
