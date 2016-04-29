@@ -84,9 +84,6 @@ public class AppActivity extends AppCompatActivity  implements NavigationView.On
             int id = item.getItemId();
 
             switch(id){
-                case R.id.deleteTeamItem:
-                    Toast.makeText(getApplicationContext(), "Clicked Delete Item", Toast.LENGTH_LONG).show();
-                    break;
                 case R.id.aboutUsItem:
                     Toast.makeText(getApplicationContext(), "Clicked About Us Item", Toast.LENGTH_LONG).show();
                     getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.bounce, R.anim.slide_out_right).replace(R.id.drawer_layout, AboutUs.newInstance()).addToBackStack(null).commit();

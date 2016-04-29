@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.firebase.client.FirebaseError;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class BookView extends AppCompatActivity implements bookViewPager.OnFragmentInteractionListener {
 
@@ -34,6 +36,7 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.pager, bookViewPager.newInstance()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.rosterHolder, rosterfragment.newInstance(hBundle)).addToBackStack(null).commit();
         }
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -109,18 +112,6 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
         //Log.d("HOME: ", homeTeam.toString());
         //Log.d("AWAY: ",awayTeam.toString());
 
-        aSwitch = (Switch)findViewById(R.id.switch1);
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    getSupportFragmentManager().beginTransaction().replace(R.id.rosterHolder, rosterfragment.newInstance(aBundle)).addToBackStack(null).commit();
-                }else{
-                    getSupportFragmentManager().beginTransaction().replace(R.id.rosterHolder, rosterfragment.newInstance(hBundle)).addToBackStack(null).commit();
-                }
-            }
-        });
-
 
 
     }
@@ -139,6 +130,11 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
         @Override
         public int getCount(){
             return 9;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup viewGroup, int poisition, Object object){
+
         }
 
     }

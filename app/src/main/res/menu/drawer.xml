@@ -9,12 +9,6 @@
             android:title="Create Team"
             />
         <item
-            android:id="@+id/deleteTeamItem"
-            android:checked="false"
-            android:icon="@drawable/ic_clear_black_24dp"
-            android:title="Delete Team"
-            />
-        <item
             android:id="@+id/aboutUsItem"
             android:checked="false"
             android:icon="@drawable/ic_accessibility_black_24dp"

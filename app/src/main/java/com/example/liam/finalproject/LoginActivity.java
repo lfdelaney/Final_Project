@@ -20,7 +20,7 @@ import com.firebase.ui.auth.core.FirebaseLoginError;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends FirebaseLoginBaseActivity implements book.OnFragmentInteractionListener{
+public class LoginActivity extends FirebaseLoginBaseActivity{
 
     Firebase firebaseRef;
     EditText userNameET;

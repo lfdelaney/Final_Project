@@ -141,31 +141,7 @@ public class recyclerview extends Fragment {
 
             @Override
             public void onOverflowMenuClick(View v,final int position){
-                PopupMenu popupMenu = new PopupMenu(getActivity(), v);
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch(item.getItemId()){
-                            case R.id.duplicateItem:
-                                //Team cloud = fireAdapter.getItem(position);
-                                //cloud.setName(cloud.getName() + "-New");
-                                //cloud.setId(cloud.getId() + "-New");
-                                //ref.child(cloud.getId()).setValue(cloud);
-                                return true;
-                            case R.id.deleteItem:
-                                //Team cloudDelete = fireAdapter.getItem(position);
-                                //ref.child(cloudDelete.getId()).removeValue();
-                                //movieData.removeItem(position);
-                                //myAdapter.notifyItemRemoved(position);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-                MenuInflater inflater1 = popupMenu.getMenuInflater();
-                inflater1.inflate(R.menu.popup_menu,popupMenu.getMenu());
-                popupMenu.show();
+
             }
 
         });
