@@ -87,11 +87,5 @@
         android:id="@+id/twitterLoginTV"
         android:layout_below="@+id/login"
         android:layout_centerHorizontal="true"/>
-    <com.twitter.sdk.android.core.identity.TwitterLoginButton
-        android:id="@+id/twitterLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/twitterLoginTV"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
