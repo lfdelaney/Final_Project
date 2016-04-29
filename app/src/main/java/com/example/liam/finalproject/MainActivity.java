@@ -42,36 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Firebase mRef = new Firebase("https://diamond-tracker.firebaseio.com/diamond-tracker/League");
-        mRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                currentTeam = dataSnapshot.getChildrenCount();
-                Log.d("snapShot", dataSnapshot.toString());
-                Log.d("current", currentTeam.toString());
-                ((MyApplication) getApplication()).setTeamCount(currentTeam.intValue());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
         TextView title = (TextView) findViewById(R.id.title);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
         title.setTypeface(tf);
@@ -86,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(getBaseContext(), AppActivity.class);
                 startActivity(intent);
                 */
-                animateIntent(v);
+                //animateIntent(v);
+                Intent intent;
+                intent = new Intent(getBaseContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.

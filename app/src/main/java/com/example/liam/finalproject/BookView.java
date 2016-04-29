@@ -28,19 +28,24 @@ import java.util.Objects;
 
 public class BookView extends AppCompatActivity implements bookViewPager.OnFragmentInteractionListener {
 
-    private Firebase mRef = new Firebase("https://diamond-tracker.firebaseio.com/League");
+    private Firebase mRef;
     private String homeName, awayName;
     private HashMap<String, ?>homeTeam, awayTeam;
-    private Switch aSwitch;
     private Bundle hBundle, aBundle;
     private int numOuts = 0;
     private EditText homeScore, awayScore;
     private int hS, aS;
     private Button submit;
+    private String uID, server;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_view);
+
+        uID = ((MyApplication)getApplication()).getID();
+        server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        mRef = new Firebase(server);
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.pager, bookViewPager.newInstance()).commit();
@@ -66,6 +71,7 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                 if (homeName.equalsIgnoreCase((String) team.get("name"))) {
                     homeTeam = team;
                     hBundle = new Bundle();
+                    hBundle.putString("id", (String) team.get("id"));
                     hBundle.putString("catcher",(String)team.get("catcher"));
                     hBundle.putString("centerField", (String) team.get("centerField"));
                     hBundle.putString("first", (String) team.get("first"));
@@ -75,25 +81,17 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                     hBundle.putString("rightField",(String)team.get("rightField"));
                     hBundle.putString("second",(String)team.get("second"));
                     hBundle.putString("shortStop",(String)team.get("shortStop"));
-                    hBundle.putString("third",(String)team.get("third"));
-                    Log.d("HOM: ", homeTeam.toString());
+                    hBundle.putString("third", (String) team.get("third"));
+                    hBundle.putLong("wins", (Long) team.get("wins"));
+                    hBundle.putLong("losses", (Long) team.get("losses"));
                     loadTeam(hBundle);
                 }
                 if (awayName.equalsIgnoreCase((String) team.get("name"))) {
                     awayTeam = team;
                     aBundle = new Bundle();
-                    aBundle.putString("catcher",(String)team.get("catcher"));
-                    aBundle.putString("centerField",(String)team.get("centerField"));
-                    aBundle.putString("first", (String) team.get("first"));
-                    aBundle.putString("leftField", (String) team.get("leftField"));
-                    aBundle.putString("name",(String)team.get("name"));
-                    aBundle.putString("pitcher",(String)team.get("pitcher"));
-                    aBundle.putString("rightField",(String)team.get("rightField"));
-                    aBundle.putString("second",(String)team.get("second"));
-                    aBundle.putString("shortStop",(String)team.get("shortStop"));
-                    aBundle.putString("third",(String)team.get("third"));
-                    aBundle.putString("url",(String)team.get("url"));
-                    Log.d("AWAY: ", awayTeam.toString());
+                    aBundle.putString("id", (String) team.get("id"));
+                    aBundle.putLong("wins", (Long) team.get("wins"));
+                    aBundle.putLong("losses", (Long) team.get("losses"));
                 }
             }
 
@@ -167,7 +165,19 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                     hS = Integer.parseInt(homeScore.getText().toString());
                     aS = Integer.parseInt(awayScore.getText().toString());
 
-                    if(hS>aS){
+                    if(hS>aS) {
+                        String hid = hBundle.getString("id");
+                        int wins = hBundle.getInt("wins");
+                        wins++;
+                        Firebase hRef = new Firebase(server +"/"+ hid+"/wins");
+                        hRef.setValue(wins);
+
+                        String aid = aBundle.getString("id");
+                        int losses = aBundle.getInt("losses");
+                        losses++;
+                        Firebase aRef = new Firebase(server +"/" + aid+"/losses");
+                        aRef.setValue(losses);
+
                         Bundle bundle = new Bundle();
                         bundle.putString("name", homeName);
                         dialogBox db = new dialogBox();
@@ -175,6 +185,17 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                         db.show(getFragmentManager(),"");
                         Toast.makeText(getApplicationContext(), "Home Team Wins", Toast.LENGTH_LONG).show();
                     }else if(aS>hS){
+                        String hid = hBundle.getString("id");
+                        int losses = hBundle.getInt("losses");
+                        losses++;
+                        Firebase hRef = new Firebase(server +"/"+ hid+"/losses");
+                        hRef.setValue(losses);
+                        String aid = aBundle.getString("id");
+                        int wins = aBundle.getInt("wins");
+                        wins++;
+                        Firebase aRef = new Firebase(server +"/"+ aid+"/losses");
+                        aRef.setValue(wins);
+
                         Bundle bundle = new Bundle();
                         bundle.putString("name", awayName);
                         dialogBox db = new dialogBox();

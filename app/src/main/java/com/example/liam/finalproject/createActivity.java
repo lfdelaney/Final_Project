@@ -30,14 +30,16 @@ public class createActivity extends AppCompatActivity {
     String imgDecodableString;
     String imageURL;
     private static int RESULT_LOAD_IMAGE = 1;
-    final private String url = "https://diamond-tracker.firebaseio.com/League";
+    private String uID, server;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_create);
 
-        mRef= new Firebase(url);
+        uID = ((MyApplication)getApplication()).getID();
+        server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        mRef = new Firebase(server);
 
         TextView title = (TextView) findViewById(R.id.t);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");

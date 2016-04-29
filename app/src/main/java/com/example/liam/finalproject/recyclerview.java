@@ -51,10 +51,10 @@ public class recyclerview extends Fragment {
     private TeamData teamData = new TeamData();
     private List<Map<String, ?>> teamList;
     private Bundle passer;
-
+    private Context mContext;
 
     public recyclerview() {
-        // Required empty public constructor
+       mContext = getActivity();
     }
 
 
@@ -82,8 +82,12 @@ public class recyclerview extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         View newView = inflater.inflate(R.layout.card_layout, container, false);
 
+        Firebase.setAndroidContext(getActivity());
+
         rview =(RecyclerView) rootview.findViewById(R.id.cardList);
-        final Firebase ref = new Firebase("https://diamond-tracker.firebaseio.com/League");
+        String uID = ((MyApplication)getActivity().getApplication()).getID();
+        String server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        final Firebase ref = new Firebase(server);
         fireAdapter = new MyFirebaseRecylerAdapter(Team.class, R.layout.card_layout,MyFirebaseRecylerAdapter.TeamViewHolder.class, ref, getActivity());
         rview.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());
@@ -93,7 +97,7 @@ public class recyclerview extends Fragment {
 
         if(teamData.getSize() == 0){
             teamData.setAdapter(fireAdapter);
-            teamData.setContext(getActivity());
+            teamData.setContext(rootview.getContext());
             teamData.initializeDataFromCloud();
 
         }

@@ -10,4 +10,5 @@
     <string name="drawer_closed">Close Drawer</string>
     <string name="title_activity_book">BookActivity</string>
     <string name="title_activity_create">createActivity</string>
+    <string name="title_activity_book_recycle_view">bookRecycleView</string>
 </resources>

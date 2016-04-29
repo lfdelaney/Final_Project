@@ -1,5 +1,6 @@
 package com.example.liam.finalproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -18,14 +19,14 @@ import java.util.Map;
  * Created by Liam on 4/27/16.
  */
 public class TeamData {
-    static private String server = "https://diamond-tracker.firebaseio.com/League";
+    private String server, uID;
     private Firebase mRef;
     private MyFirebaseRecylerAdapter mAdapter;
     private Context context;
+
     List<Map<String, ?>> teamData;
 
     public TeamData(){
-        mRef = new Firebase(server);
         mRef.goOffline();
         mRef.goOnline();
         teamData = new ArrayList<Map<String, ?>>();
@@ -34,7 +35,12 @@ public class TeamData {
     public void setContext(Context c){ context = c;}
     public void initializeDataFromCloud(){
         Log.d("intialize", "enter");
-
+        if (context == null){
+            Log.d("go", "to bed");
+        }
+        uID = ((MyApplication)context.getApplicationContext()).getID();
+        server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        mRef = new Firebase(server);
         teamData.clear();
 
         mRef.addChildEventListener(new ChildEventListener() {

@@ -7,7 +7,12 @@ import android.app.Application;
  */
 public class MyApplication extends Application {
     private int teamCount;
+    private String uID;
 
+    public String getID()  { return uID;}
+    public void setuID(String i) {
+        uID = i;
+    }
     public int getCount(){
         return teamCount;
     }

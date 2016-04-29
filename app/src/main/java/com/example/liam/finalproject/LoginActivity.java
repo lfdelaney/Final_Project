@@ -20,6 +20,8 @@ import com.firebase.ui.auth.core.FirebaseLoginError;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class LoginActivity extends FirebaseLoginBaseActivity{
 
     Firebase firebaseRef;
@@ -54,6 +56,7 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
                 LoginActivity.this.showFirebaseLoginPrompt();
             }
         });
+
 
         Button createButton = (Button) findViewById(R.id.button);
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -98,11 +101,7 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
         Log.d("auth", authData.toString());
         Log.d("mName", mName);
 
-        Firebase uRef = firebaseRef.child("users");
-        Firebase graceRef = uRef.child(authData.getUid());
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("E-Mail", authData.getProviderData().get("email"));
-        graceRef.updateChildren(map);
+        ((MyApplication)getApplication()).setuID(authData.getUid());
 
         Toast.makeText(getApplicationContext(), LOGIN_SUCCESS, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this,AppActivity.class);

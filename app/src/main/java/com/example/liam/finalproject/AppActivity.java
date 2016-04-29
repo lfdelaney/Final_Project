@@ -92,6 +92,9 @@ public class AppActivity extends AppCompatActivity  implements NavigationView.On
                     Intent intent2 = new Intent(this,createActivity.class);
                     startActivity(intent2);
                     break;
+                case R.id.logOut:
+                    logOutDialog db = new logOutDialog();
+                    db.show(getFragmentManager(), "");
                 default:
                     break;
             }

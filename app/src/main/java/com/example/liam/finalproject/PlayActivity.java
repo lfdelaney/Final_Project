@@ -33,8 +33,8 @@ public class PlayActivity extends AppCompatActivity {
     String[] nameList;
     Long children;
     ArrayAdapter<String> adapter;
-    Firebase ref = new Firebase("https://diamond-tracker.firebaseio.com/League");
-
+    Firebase ref;
+    String uID, server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +43,28 @@ public class PlayActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         setContentView(R.layout.activity_play);
 
+        uID = ((MyApplication)getApplication()).getID();
+        server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        ref = new Firebase(server);
+
         TextView title = (TextView) findViewById(R.id.name);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/playball.ttf");
         title.setTypeface(tf);
 
 
-        nameList = new String[30];
-        for (int i = 0; i <nameList.length; i++){
-            nameList[i] = ""+i;
-        }
         homeSpinner = (Spinner)findViewById(R.id.homeTeam);
         awaySpinner = (Spinner)findViewById(R.id.awayTeam);
+
+        nameList = new String[30];
+        for(int i =0; i<nameList.length; i++){
+            nameList[i] = ""+i;
+        }
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 HashMap<String, ?> team = (HashMap<String, ?>) dataSnapshot.getValue();
+                Log.d("dSS", dataSnapshot.toString());
                 nameList[count] = (String) team.get("name");
                 Log.d("Added to list: ", nameList[count]);
                 count++;
