@@ -17,20 +17,23 @@
         android:layout_alignTop="@+id/diamond"
         android:layout_centerHorizontal="true"
         android:textSize="32sp"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"
+        android:transitionName="titleTrans"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="400dp"
         android:id="@+id/diamond"
         android:src="@drawable/diamond"
+        android:transitionName="transImg"
         />
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:id="@+id/login"
-        android:text="@string/login"
+        android:text="Start"
         android:background="@color/green"
         android:textColor="@color/white"
         android:layout_below="@+id/diamond"
+        android:onClick="animateIntent"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

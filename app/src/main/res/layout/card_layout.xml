@@ -26,24 +26,12 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY" />
 
 
             <RelativeLayout
                 android:layout_width="269dp"
                 android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/sports"
-                    android:clickable="true"
-                    android:id="@+id/cardClick"
-                    android:layout_marginRight="98dp"
-                    android:layout_marginEnd="98dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
 
                 <TextView
                     android:id="@+id/title"

@@ -65,7 +65,7 @@ public class MyFirebaseRecylerAdapter extends FirebaseRecyclerAdapter<Team,MyFir
             vTitle =  (TextView) v.findViewById(R.id.title);
             vImg = (ImageView)  v.findViewById(R.id.image);
             //vDesc = (TextView)  v.findViewById(R.id.description);
-            vMenu = (ImageView) v.findViewById(R.id.cardClick);
+            //vMenu = (ImageView) v.findViewById(R.id.cardClick);
             record = (TextView) v.findViewById(R.id.teamRecord);
 
             v.setOnClickListener(new View.OnClickListener() {

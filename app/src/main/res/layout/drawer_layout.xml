@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AppActivity"
-    android:background="#0E980C">
+    tools:context=".AppActivity">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/holder"
@@ -53,7 +52,17 @@
                 android:layout_marginTop="50dp"
                 android:textSize="32sp"
                 android:textColor="@color/red"
-                android:layout_gravity="center|top"/>
+                android:layout_gravity="center|top"
+                android:transitionName="titleTrans"/>
+
+            <ImageView
+                android:layout_width="118dp"
+                android:layout_height="172dp"
+                android:id="@+id/img"
+                android:src="@drawable/diamond"
+                android:layout_gravity="center_horizontal|top"
+                android:transitionName="transImg"
+                android:layout_marginTop="55dp"/>
         </FrameLayout>
 
     </RelativeLayout>
