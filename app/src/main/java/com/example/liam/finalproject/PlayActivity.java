@@ -92,7 +92,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                p1 = (String) parent.getItemAtPosition(position);
+                p2 = (String) parent.getItemAtPosition(position);
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
 
@@ -105,7 +105,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                p2 = (String) parent.getItemAtPosition(position);
+                p1 = (String) parent.getItemAtPosition(position);
                 Log.v("item", (String) parent.getItemAtPosition(position));
             }
 
@@ -119,15 +119,12 @@ public class PlayActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BookView.class);
-                startActivity(intent);
+                Intent share = new Intent(PlayActivity.this, BookView.class);
+                share.putExtra("homeTeam", p1);
+                share.putExtra("awayTeam", p2);
+                startActivity(share);
             }
         });
-
-        Intent share = new Intent(PlayActivity.this,BookView.class);
-        share.putExtra("homeTeam",p1);
-        share.putExtra("awayTeam",p2);
-        startActivity(share);
 
     }
 }

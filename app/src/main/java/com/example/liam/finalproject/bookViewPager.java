@@ -95,6 +95,6 @@ public class bookViewPager extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onImageButtonClicked();
+        void onImageButtonClicked(int x);
     }
 }
