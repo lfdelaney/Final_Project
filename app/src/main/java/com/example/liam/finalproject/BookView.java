@@ -37,7 +37,6 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
     private EditText homeScore, awayScore;
     private int hS, aS;
     private Button submit;
-    private dialogBox db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,11 +168,17 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                     aS = Integer.parseInt(awayScore.getText().toString());
 
                     if(hS>aS){
-                        db = new dialogBox().newInstance(homeName);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", homeName);
+                        dialogBox db = new dialogBox();
+                        db.setArguments(bundle);
                         db.show(getFragmentManager(),"");
                         Toast.makeText(getApplicationContext(), "Home Team Wins", Toast.LENGTH_LONG).show();
                     }else if(aS>hS){
-                        db = new dialogBox().newInstance(awayName);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", awayName);
+                        dialogBox db = new dialogBox();
+                        db.setArguments(bundle);
                         db.show(getFragmentManager(),"");
                         Toast.makeText(getApplicationContext(), "Away Team Wins", Toast.LENGTH_LONG).show();
                     }

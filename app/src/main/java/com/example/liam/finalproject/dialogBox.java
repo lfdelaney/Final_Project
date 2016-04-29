@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -48,11 +49,13 @@ public class dialogBox extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
+        String text = getArguments().getString("name");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("The " + mParam1 +" Won!")
+        builder.setMessage("The " + text +" Won!")
                 .setPositiveButton("Return to Home Screen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        Intent intent = new Intent(getActivity().getApplicationContext(), AppActivity.class);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
