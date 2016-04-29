@@ -116,6 +116,7 @@ public class bookViewPager extends Fragment {
                                 t1.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t1.setText("X");
                                 return true;
                             default:
@@ -150,6 +151,7 @@ public class bookViewPager extends Fragment {
                                 t2.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t2.setText("X");
                                 return true;
                             default:
@@ -184,6 +186,7 @@ public class bookViewPager extends Fragment {
                                 t3.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t3.setText("X");
                                 return true;
                             default:
@@ -218,6 +221,7 @@ public class bookViewPager extends Fragment {
                                 t4.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t4.setText("X");
                                 return true;
                             default:
@@ -252,6 +256,7 @@ public class bookViewPager extends Fragment {
                                 t5.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t5.setText("X");
                                 return true;
                             default:
@@ -286,6 +291,7 @@ public class bookViewPager extends Fragment {
                                 t6.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t6.setText("X");
                                 return true;
                             default:
@@ -320,6 +326,7 @@ public class bookViewPager extends Fragment {
                                 t7.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t7.setText("X");
                                 return true;
                             default:
@@ -354,6 +361,7 @@ public class bookViewPager extends Fragment {
                                 t8.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t8.setText("X");
                                 return true;
                             default:
@@ -388,6 +396,7 @@ public class bookViewPager extends Fragment {
                                 t9.setText("HR");
                                 return true;
                             case R.id.outItem:
+                                mListener.onOutClick();
                                 t9.setText("X");
                                 return true;
                             default:
@@ -428,6 +437,6 @@ public class bookViewPager extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onImageButtonClicked(int x);
+        void onOutClick();
     }
 }

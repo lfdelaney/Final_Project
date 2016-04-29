@@ -7,10 +7,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -29,6 +33,11 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
     private HashMap<String, ?>homeTeam, awayTeam;
     private Switch aSwitch;
     private Bundle hBundle, aBundle;
+    private int numOuts = 0;
+    private EditText homeScore, awayScore;
+    private int hS, aS;
+    private Button submit;
+    private dialogBox db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +45,6 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
 
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.pager, bookViewPager.newInstance()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.rosterHolder, rosterfragment.newInstance(hBundle)).addToBackStack(null).commit();
         }
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
@@ -47,6 +55,9 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
         homeName = bundle.getString("homeTeam");
         awayName = bundle.getString("awayTeam");
 
+        homeScore = (EditText)findViewById(R.id.homeScore);
+        awayScore = (EditText)findViewById(R.id.awayScore);
+        submit = (Button)findViewById(R.id.submitBut);
 
         mRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -67,6 +78,7 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                     hBundle.putString("shortStop",(String)team.get("shortStop"));
                     hBundle.putString("third",(String)team.get("third"));
                     Log.d("HOM: ", homeTeam.toString());
+                    loadTeam(hBundle);
                 }
                 if (awayName.equalsIgnoreCase((String) team.get("name"))) {
                     awayTeam = team;
@@ -107,13 +119,6 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
             }
         });
 
-
-
-        //Log.d("HOME: ", homeTeam.toString());
-        //Log.d("AWAY: ",awayTeam.toString());
-
-
-
     }
 
     private class myAdapt extends FragmentPagerAdapter
@@ -139,8 +144,41 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
 
     }
 
-    @Override
-    public void onImageButtonClicked(int x){
+    public void loadTeam(Bundle b){
+        getSupportFragmentManager().beginTransaction().replace(R.id.rosterHolder, rosterfragment.newInstance(b)).commit();
+    }
 
+    @Override
+    public void onOutClick(){
+        numOuts++;
+        Log.d("outs: ", numOuts+"");
+        if(numOuts == 3){
+            Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_LONG).show();
+            Log.d("GAME OVER", "gameover");
+            homeScore.setVisibility(View.VISIBLE);
+            awayScore.setVisibility(View.VISIBLE);
+            submit.setVisibility(View.VISIBLE);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(homeScore.getText().toString() == "" && awayScore.getText().toString() == "")
+                        return;
+
+                    hS = Integer.parseInt(homeScore.getText().toString());
+                    aS = Integer.parseInt(awayScore.getText().toString());
+
+                    if(hS>aS){
+                        db = new dialogBox().newInstance(homeName);
+                        db.show(getFragmentManager(),"");
+                        Toast.makeText(getApplicationContext(), "Home Team Wins", Toast.LENGTH_LONG).show();
+                    }else if(aS>hS){
+                        db = new dialogBox().newInstance(awayName);
+                        db.show(getFragmentManager(),"");
+                        Toast.makeText(getApplicationContext(), "Away Team Wins", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
     }
 }
