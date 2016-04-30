@@ -107,7 +107,7 @@ public class LoginActivity extends FirebaseLoginBaseActivity{
         Intent intent = new Intent(this,AppActivity.class);
         startActivity(intent);
         //getSupportFragmentManager().beginTransaction().replace(R.id.container, book.newInstance(authData.getUid())).addToBackStack(null).commit();
-        firebaseRef.unauth();
+        //firebaseRef.unauth();
     }
 
     @Override

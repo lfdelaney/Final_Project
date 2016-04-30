@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
+
 public class AppActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -101,5 +103,4 @@ public class AppActivity extends AppCompatActivity  implements NavigationView.On
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         }
-
 }

@@ -40,7 +40,9 @@ public class TeamData {
         }
         uID = ((MyApplication)context.getApplicationContext()).getID();
         server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        Log.d("ref", server);
         mRef = new Firebase(server);
+        Log.d("post", "call");
         teamData.clear();
 
         mRef.addChildEventListener(new ChildEventListener() {

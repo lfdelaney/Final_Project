@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Fade;
+import android.view.View;
+
+import com.firebase.client.Firebase;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +31,5 @@ public class BookActivity extends AppCompatActivity implements recyclerview.OnFr
     {
         getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.bounce, R.anim.slide_out_right).replace(R.id.myholder, teamview.newInstance(x,b)).addToBackStack(null).commit();
     }
-
-
 
 }

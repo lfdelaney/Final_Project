@@ -9,24 +9,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link logOutDialog.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link logOutDialog#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.firebase.client.Firebase;
+
+
 public class logOutDialog extends DialogFragment {
 
     private String mParam1;
     private String name;
-
     public logOutDialog(){
 
     }
@@ -37,6 +32,10 @@ public class logOutDialog extends DialogFragment {
         builder.setMessage("Log Out?")
                 .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        String uID = ((MyApplication)getActivity().getApplication()).getID();
+                        String server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+                        Firebase ref = new Firebase(server);
+                        ref.unauth();
                         Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                     }

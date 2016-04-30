@@ -87,7 +87,9 @@ public class recyclerview extends Fragment {
         rview =(RecyclerView) rootview.findViewById(R.id.cardList);
         String uID = ((MyApplication)getActivity().getApplication()).getID();
         String server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        Log.d("serverRef", server);
         final Firebase ref = new Firebase(server);
+        Log.d("ref", "post");
         fireAdapter = new MyFirebaseRecylerAdapter(Team.class, R.layout.card_layout,MyFirebaseRecylerAdapter.TeamViewHolder.class, ref, getActivity());
         rview.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());

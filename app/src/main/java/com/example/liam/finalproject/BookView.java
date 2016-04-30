@@ -148,7 +148,7 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
     @Override
     public void onOutClick(){
         numOuts++;
-        Log.d("outs: ", numOuts+"");
+        Log.d("outs: ", numOuts + "");
         if(numOuts == 3){
             Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_LONG).show();
             Log.d("GAME OVER", "gameover");
@@ -206,5 +206,13 @@ public class BookView extends AppCompatActivity implements bookViewPager.OnFragm
                 }
             });
         }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        String uID = ((MyApplication)this.getApplication()).getID();
+        String server = "https://diamond-tracker.firebaseio.com/users/"+ uID+ "/League";
+        Firebase ref = new Firebase(server);
+        ref.unauth();
     }
 }
